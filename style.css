@@ -49,3 +49,31 @@ gap: 2rem;
 .main-ul .active {
     color: var(--clr-main-orange);
 }
+
+/*NEWS SECTION*/
+
+.news-section{
+    margin-top: 2rem;
+    padding-inline: 2rem;
+}
+
+.news-list{
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.news{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+
+.news-img img{
+    width: 100%;
+    aspect-ratio: 2;
+    object-fit: cover;
+}
+
+.news-body, .news-footer{
+    padding: 10px;
+}
