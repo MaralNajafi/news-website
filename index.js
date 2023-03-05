@@ -25,7 +25,7 @@ function UpdateDOMwithNews() {
   const news = newsListArray.map(news => {
     return (
       `
-        <a href="${news.url}" target="_blank" class="news-warpperLink d-block">
+        <a href="${news.url}" target="_blank">
           <li class="news d-flex flex-col">
             <div class="news-img">
               <img
