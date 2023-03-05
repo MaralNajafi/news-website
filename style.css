@@ -84,9 +84,12 @@
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   height: 100%;
+  transition: all 100ms;
 }
 
 .news:hover {
+    box-shadow: var(--clr-primary-dark) 0px 2px 8px;
+
 }
 
 .news-title {
