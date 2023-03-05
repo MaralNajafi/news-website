@@ -100,6 +100,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   newsListArray = await fetchNewsAPI();
   UpdateDOMwithNews();
   const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
-  bookmarkedNews = localStorageBookmarks ? [localStorageBookmarks.split(",")] : [];
+  bookmarkedNews = localStorageBookmarks ?localStorageBookmarks.split(",") : [];
   DOMbookmarksCount.innerHTML = bookmarkedNews.length;
 });
