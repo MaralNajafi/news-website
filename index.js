@@ -24,6 +24,7 @@ function setIDtoNews() {
 }
 
 function UpdateDOMwithNews() {
+  console.log(bookmarkedNews);
   setIDtoNews();
   const news = newsListArray.map(news => {
     return (
@@ -98,8 +99,8 @@ function updateBookmarks(event) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   newsListArray = await fetchNewsAPI();
-  UpdateDOMwithNews();
   const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
-  bookmarkedNews = localStorageBookmarks ?localStorageBookmarks.split(",") : [];
+  bookmarkedNews = localStorageBookmarks ?localStorageBookmarks.split(",").map(Number) : [];
   DOMbookmarksCount.innerHTML = bookmarkedNews.length;
+  UpdateDOMwithNews();
 });
