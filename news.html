@@ -10,23 +10,41 @@
   </head>
   <body>
     <div class="main-container">
-      <header class="main-header d-flex flex-row ai-center">
-        <h1 class="d-flex ai-center h-100">my news</h1>
+      <header class="main-header d-flex flex-row">
+        <h1>
+          My <br />
+          news
+        </h1>
         <nav class="main-nav">
-          <ul class="main-ul d-flex flex-row ai-center">
-            <li class="main-li"><a href="#" class="d-block hw-100">home</a></li>
-            <li class="main-li active">
-              <a href="news.html" class="d-block hw-100">news</a>
-            </li>
-            <li class="main-li">
-              <a href="#" class="d-block hw-100">about</a>
-            </li>
-            <li class="main-li">
-              <a href="#" class="d-block hw-100">contact</a>
-            </li>
-            <li class="main-li"><a href="#" class="d-block hw-100">join</a></li>
+          <ul class="main-ul d-flex flex-row">
+            <li class="main-li"><a href="#">home</a></li>
+            <li class="main-li active"><a href="#">news</a></li>
+            <li class="main-li"><a href="#">contact</a></li>
+            <li class="main-li"><a href="#">about</a></li>
           </ul>
         </nav>
+        <div class="bookmarks d-flex ai-center">
+          <div class="bookmarks-count-wrapper d-flex ai-center jc-center">
+            <span id="bookmarksCount">+9</span>
+          </div>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28px"
+              height="28px"
+              fill="#fff"
+              class="bi bi-bookmarks-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"
+              />
+              <path
+                d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"
+              />
+            </svg>
+          </div>
+        </div>
       </header>
       <main>
         <section class="news-section">
