@@ -1,0 +1,51 @@
+:root{
+    /*font family*/
+    --ff-main: 'Roboto', sans-serif;
+
+    /*color*/
+    --clr-main-gray: rgba(78, 75, 98, 1);
+    --clr-main-orange: rgba(246, 99, 20, 1);
+    --clr-main-bg: rgb(243, 243, 243);
+
+}
+
+.main-container{
+    min-height: 100vh;
+    background-color: var(--clr-main-bg);
+    font-family: var(--ff-main);
+}
+
+.main-header{
+    background-color: var(--clr-main-gray);
+    min-height: 4rem;
+    gap: 1rem;
+}
+
+.main-header h1{
+    background-color: var(--clr-main-orange);
+    color: var(--clr-main-gray);
+    padding: 1rem;
+    font-family: var(--ff-main);
+    text-transform: uppercase;
+    font-size: 4rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.main-ul{
+gap: 2rem;
+}
+
+.main-li{
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.main-li:hover{
+    color: var(--clr-main-orange);
+}
+
+.main-ul .active {
+    color: var(--clr-main-orange);
+}
