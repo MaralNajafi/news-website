@@ -9,16 +9,24 @@ async function fetchNewsAPI() {
 }
 
 let newsListArray = [];
+let newsID = 0;
 
 // DOM variables
 const DOMnewsList = document.getElementById("newsList");
+function setIDtoNews() {
+  newsListArray.forEach(news => {
+    newsID++
+    news.id = newsID;
+  })
+}
 
 function UpdateDOMwithNews() {
-  console.log(newsListArray);
+  setIDtoNews();
   const news = newsListArray.map(news => {
     return (
       `
-            <li class="news d-flex flex-col">
+        <a href="${news.url}" target="_blank">
+          <li class="news d-flex flex-col">
             <div class="news-img">
               <img
                 src="${news.urlToImage}"
@@ -31,17 +39,32 @@ function UpdateDOMwithNews() {
               ${news.description}
               </p>
             </div>
-            <div class="news-footer">
-                <button class="read-more-btn d-block">
-                  <a href="${news.url}" class="hw-100">read more</a>
-                </button>
+            <div class="news-footer d-flex">
+              <button 
+              class="add-favorite-btn d-block" 
+              data-id="${news.id}"
+              >
+                <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                fill="var(--clr-primary)" 
+                class="bi bi-bookmark" 
+                viewBox="0 0 16 16"
+                >
+                  <path 
+                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"
+                  />
+                </svg>
+              </button>
             </div>
           </li>
+        </a>
 
-            `
+      `
     )
 
-  }).join("")
+  }).join("");
 
   DOMnewsList.innerHTML = news;
 }
