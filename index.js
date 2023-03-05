@@ -10,9 +10,12 @@ async function fetchNewsAPI() {
 
 let newsListArray = [];
 let newsID = 0;
+let bookmarkedNews = [];
 
 // DOM variables
 const DOMnewsList = document.getElementById("newsList");
+const DOMbookmarksCount = document.getElementById("bookmarksCount");
+
 function setIDtoNews() {
   newsListArray.forEach(news => {
     newsID++
@@ -25,8 +28,8 @@ function UpdateDOMwithNews() {
   const news = newsListArray.map(news => {
     return (
       `
+      <li class="news d-flex flex-col">
         <a href="${news.url}" target="_blank">
-          <li class="news d-flex flex-col">
             <div class="news-img">
               <img
                 src="${news.urlToImage}"
@@ -39,9 +42,10 @@ function UpdateDOMwithNews() {
               ${news.description}
               </p>
             </div>
+            </a>
             <div class="news-footer d-flex">
               <button 
-              class="add-favorite-btn d-block" 
+              class="add-bookmark-btn d-block" 
               data-id="${news.id}"
               >
                 <svg 
@@ -59,7 +63,7 @@ function UpdateDOMwithNews() {
               </button>
             </div>
           </li>
-        </a>
+        
 
       `
     )
@@ -67,9 +71,35 @@ function UpdateDOMwithNews() {
   }).join("");
 
   DOMnewsList.innerHTML = news;
+  addEventListenerToBookmarkBtns();
 }
+
+function addEventListenerToBookmarkBtns() {
+  const bookmarkBtns = document.querySelectorAll(".add-bookmark-btn");
+
+  bookmarkBtns.forEach(bookmarkbtn =>{
+    bookmarkbtn.addEventListener('click', updateBookmarks)
+  })
+
+}
+
+function updateBookmarks(event) {
+  const bookmarkednNewsID = +event.target.closest("button").dataset.id;
+  if (bookmarkedNews.includes(bookmarkednNewsID)) {
+    return
+  }else{
+
+    bookmarkedNews.push(bookmarkednNewsID);
+    localStorage.setItem("bookmarkedNewsIDList", bookmarkedNews);
+    DOMbookmarksCount.innerHTML = bookmarkedNews.length;
+  }
+}
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   newsListArray = await fetchNewsAPI();
   UpdateDOMwithNews();
+  const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
+  bookmarkedNews = localStorageBookmarks ? [localStorageBookmarks.split(",")] : [];
+  DOMbookmarksCount.innerHTML = bookmarkedNews.length;
 });
