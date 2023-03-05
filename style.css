@@ -132,3 +132,11 @@
 .add-bookmark-btn{
   padding: 5zpx;
 }
+
+.add-bookmark-btn:hover{
+  cursor: pointer;
+}
+
+.add-bookmark-btn:disabled{
+  cursor: auto;
+}

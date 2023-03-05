@@ -79,6 +79,7 @@ function addEventListenerToBookmarkBtns() {
       }else{
         updateBookmarks(bookmarkednNewsID);
         event.target.closest("svg").style.fill = "var(--clr-primary)"
+        bookmarkbtn.disabled = true;
       }
     })
   })
