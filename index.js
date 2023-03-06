@@ -82,7 +82,7 @@ function addEventListenerToBookmarkBtns() {
       if (isBookmarked) {
         return
       } else {
-        updateBookmarks(bookmarkednNewsID);
+        addBookmark(bookmarkednNewsID);
         event.target.closest("svg").style.fill = "var(--clr-primary)"
         bookmarkbtn.disabled = true;
       }
@@ -91,19 +91,21 @@ function addEventListenerToBookmarkBtns() {
 
 }
 
-function updateBookmarks(bookmarkednNewsID) {
+function updateBookmark() {
+  DOMbookmarksCount.innerHTML = bookmarkedNews.length > 9 ? '+9' : bookmarkedNews.length;
 
+}
+
+function addBookmark(bookmarkednNewsID) {
   bookmarkedNews.push(bookmarkednNewsID);
   localStorage.setItem("bookmarkedNewsIDList", bookmarkedNews);
-  DOMbookmarksCount.innerHTML = bookmarkedNews.length;
-
+  updateBookmark()
 }
 
 function updateBookmarksCountFromLocalStorage() {
   const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
   bookmarkedNews = localStorageBookmarks ? localStorageBookmarks.split(",").map(Number) : [];
-  DOMbookmarksCount.innerHTML = bookmarkedNews.length;
-
+  updateBookmark()
 }
 
 

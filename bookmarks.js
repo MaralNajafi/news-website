@@ -85,11 +85,15 @@ function UpdateDOMwithBookmarkedNews() {
 
 }
 
+function updateBookmark() {
+  DOMbookmarksCount.innerHTML = bookmarkedNews.length > 9 ? '+9' : bookmarkedNews.length;
+
+}
+
 function updateBookmarksCountFromLocalStorage() {
   const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
   bookmarkedNews = localStorageBookmarks ? localStorageBookmarks.split(",").map(Number) : [];
-  DOMbookmarksCount.innerHTML = bookmarkedNews.length;
-
+  updateBookmark();
 }
 
 
