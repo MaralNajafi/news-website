@@ -134,7 +134,15 @@
 }
 
 .add-bookmark-btn {
-  padding: 5zpx;
+  padding: 5px;
+}
+
+.add-bookmark-btn:active{
+  transform: scale(0.9);
+}
+
+.add-bookmark-btn:disabled{
+  transform: scale(1);
 }
 
 .add-bookmark-btn:hover {
