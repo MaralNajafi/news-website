@@ -11,6 +11,7 @@
 .main-container {
   min-height: 100vh;
   font-family: var(--ff-main);
+  background-color: #f4f4f4;
 }
 
 .main-header {
