@@ -50,8 +50,11 @@
   color: rgba(255, 255, 255, 1);
 }
 
-.bookmarks {
+.bookmarks-wrapperLink {
   margin-left: auto;
+}
+
+.bookmarks {
   padding-block: 0.6rem;
   color: #fff;
   position: relative;
