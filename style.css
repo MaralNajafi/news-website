@@ -83,6 +83,11 @@
   gap: 2rem;
 }
 
+.empty-news-list {
+  place-items: center;
+  grid-template-columns: 1fr;
+}
+
 .news {
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;

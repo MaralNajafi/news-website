@@ -1,11 +1,11 @@
 const API_URL = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=b918bb453f1340d4bb0d9eb17c37079d";
 
 async function fetchNewsAPI() {
-    const API_DATA = await fetch(API_URL);
-    const API_DATA_JSON = await API_DATA.json();
-    const NEWS_ARTICLES = API_DATA_JSON.articles;
+  const API_DATA = await fetch(API_URL);
+  const API_DATA_JSON = await API_DATA.json();
+  const NEWS_ARTICLES = API_DATA_JSON.articles;
 
-    return NEWS_ARTICLES;
+  return NEWS_ARTICLES;
 }
 
 let newsID = 0;
@@ -19,19 +19,19 @@ const DOMbookmarkedNewsList = document.getElementById("bookmarkedNewsList");
 const DOMbookmarksCount = document.getElementById("bookmarksCount");
 
 function setIDtoNews() { // the API does't have numeric unique ID
-    newsListArray.forEach(news => {
-        newsID++
-        news.id = newsID;
-    })
+  newsListArray.forEach(news => {
+    newsID++
+    news.id = newsID;
+  })
 }
 
 function UpdateDOMwithBookmarkedNews() {
-    
-    const bookmarked = bookmarkedNewsListArray.map(bookmarked => {
-        
-        isBookmarked = bookmarkedNews.includes(bookmarked.id);
-        return (
-            `
+
+  const bookmarked = bookmarkedNewsListArray.map(bookmarked => {
+
+    isBookmarked = bookmarkedNews.includes(bookmarked.id);
+    return (
+      `
         <li class="news d-flex flex-col">
           <a href="${bookmarked.url}" target="_blank">
             <div class="news-img">
@@ -66,25 +66,38 @@ function UpdateDOMwithBookmarkedNews() {
           </div>
         </li>
         `
-        )
+    )
 
-    }).join("");
+  }).join("");
 
+  if (bookmarkedNewsListArray.length > 0) {
     DOMbookmarkedNewsList.innerHTML = bookmarked;
+
+  } else {
+    DOMbookmarkedNewsList.classList.add("empty-news-list")
+    DOMbookmarkedNewsList.innerHTML = `
+      <div>
+        <span style="color: #7d7d7d;">No bookmarks yet</span>
+      </div>
+    `;
+
+  }
+
 }
 
 
-document.addEventListener("DOMContentLoaded", async () => {
-    newsListArray = await fetchNewsAPI();
-    setIDtoNews();
-    const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
-    bookmarkedNews = localStorageBookmarks ? localStorageBookmarks.split(",").map(Number) : [];
-    DOMbookmarksCount.innerHTML = bookmarkedNews.length;
-    bookmarkedNewsListArray = newsListArray.filter((news) => {
-        return bookmarkedNews.includes(news.id);
-      });
 
-    UpdateDOMwithBookmarkedNews();
+document.addEventListener("DOMContentLoaded", async () => {
+  newsListArray = await fetchNewsAPI();
+  setIDtoNews();
+  const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
+  bookmarkedNews = localStorageBookmarks ? localStorageBookmarks.split(",").map(Number) : [];
+  DOMbookmarksCount.innerHTML = bookmarkedNews.length;
+  bookmarkedNewsListArray = newsListArray.filter((news) => {
+    return bookmarkedNews.includes(news.id);
+  });
+
+  UpdateDOMwithBookmarkedNews();
 });
 
 
