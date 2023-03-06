@@ -17,12 +17,7 @@
 .main-header {
   background-color: var(--clr-primary);
   padding-inline: 2rem;
-  align-items: flex-end;
-  justify-content: flex-start;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  padding-block-start: 1rem;
 }
 
 .main-header h1 {
@@ -33,7 +28,12 @@
 }
 
 .main-nav {
-  padding: 0.6rem 2rem;
+  background-color: var(--clr-primary);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  padding-inline: 2rem;
+  position: sticky;
+  top: 0;
 }
 
 .main-nav .main-ul {
@@ -49,10 +49,6 @@
 .main-ul .main-li:hover,
 .main-ul .active {
   color: rgba(255, 255, 255, 1);
-}
-
-.bookmarks-wrapperLink {
-  margin-left: auto;
 }
 
 .bookmarks {
