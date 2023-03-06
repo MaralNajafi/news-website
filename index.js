@@ -99,11 +99,16 @@ function updateBookmarks(bookmarkednNewsID) {
 
 }
 
-
-document.addEventListener("DOMContentLoaded", async () => {
-  newsListArray = await fetchNewsAPI();
+function updateBookmarksCountFromLocalStorage() {
   const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
   bookmarkedNews = localStorageBookmarks ? localStorageBookmarks.split(",").map(Number) : [];
   DOMbookmarksCount.innerHTML = bookmarkedNews.length;
+
+}
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  updateBookmarksCountFromLocalStorage();
+  newsListArray = await fetchNewsAPI();
   UpdateDOMwithNews();
 });

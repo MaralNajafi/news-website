@@ -85,14 +85,19 @@ function UpdateDOMwithBookmarkedNews() {
 
 }
 
-
-
-document.addEventListener("DOMContentLoaded", async () => {
-  newsListArray = await fetchNewsAPI();
-  setIDtoNews();
+function updateBookmarksCountFromLocalStorage() {
   const localStorageBookmarks = localStorage.getItem("bookmarkedNewsIDList");
   bookmarkedNews = localStorageBookmarks ? localStorageBookmarks.split(",").map(Number) : [];
   DOMbookmarksCount.innerHTML = bookmarkedNews.length;
+
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  updateBookmarksCountFromLocalStorage();
+  newsListArray = await fetchNewsAPI();
+  setIDtoNews();
   bookmarkedNewsListArray = newsListArray.filter((news) => {
     return bookmarkedNews.includes(news.id);
   });
