@@ -83,7 +83,7 @@ function addEventListenerToBookmarkBtns() {
         return
       } else {
         addBookmark(bookmarkednNewsID);
-        event.target.closest("svg").style.fill = "var(--clr-primary)"
+        bookmarkbtn.firstElementChild.style.fill = "var(--clr-primary)"
         bookmarkbtn.disabled = true;
       }
     })
