@@ -81,8 +81,22 @@
   padding-bottom: 2rem;
 }
 
+.news-section h2 {
+  display: inline-block;
+  align-self: center;
+  padding-inline: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #b5b5b9;
+  color: var(--clr-primary);
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+}
+
 .news-list {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
 }
 
@@ -136,12 +150,11 @@
   font-family: inherit;
 }
 
-
-.add-bookmark-btn:active{
+.add-bookmark-btn:active {
   transform: scale(0.9);
 }
 
-.add-bookmark-btn:disabled{
+.add-bookmark-btn:disabled {
   transform: scale(1);
 }
 
