@@ -25,7 +25,6 @@ function UpdateDOMwithNews() {
           <button 
           class="add-bookmark-btn d-block" 
           data-id="${news.id}"
-          ${isBookmarked ? "disabled" : ""}
           >
           <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -50,23 +49,33 @@ function UpdateDOMwithNews() {
 function addEventListenerToBookmarkBtns() {
   const bookmarkBtns = document.querySelectorAll(".add-bookmark-btn");
 
-  bookmarkBtns.forEach((bookmarkbtn) => {
-    bookmarkbtn.addEventListener("click", (event) => {
-      const bookmarkednNewsID = +event.target.closest("button").dataset.id;
-      isBookmarked = bookmarkedNews.includes(bookmarkednNewsID);
+  bookmarkBtns.forEach((bookmarkBtn) => {
+    bookmarkBtn.addEventListener("click", (event) => {
+      const bookmarkedNewsID = +event.target.closest("button").dataset.id;
+      isBookmarked = bookmarkedNews.includes(bookmarkedNewsID);
       if (isBookmarked) {
+        bookmarkBtn.firstElementChild.style.fill = "#ddd";
+        const delIndex = bookmarkedNews.findIndex(
+          (item) => item === bookmarkedNewsID
+        );
+        removeBookmark(delIndex);
         return;
       } else {
-        addBookmark(bookmarkednNewsID);
-        bookmarkbtn.firstElementChild.style.fill = "var(--clr-primary)";
-        bookmarkbtn.disabled = true;
+        addBookmark(bookmarkedNewsID);
+        bookmarkBtn.firstElementChild.style.fill = "var(--clr-primary)";
       }
     });
   });
 }
 
-function addBookmark(bookmarkednNewsID) {
-  bookmarkedNews.push(bookmarkednNewsID);
+function removeBookmark(delIndex) {
+  bookmarkedNews.splice(delIndex, 1);
+  localStorage.setItem("bookmarkedNewsIDList", bookmarkedNews);
+  updateBookmark();
+}
+
+function addBookmark(bookmarkedNewsID) {
+  bookmarkedNews.push(bookmarkedNewsID);
   localStorage.setItem("bookmarkedNewsIDList", bookmarkedNews);
   updateBookmark();
 }
