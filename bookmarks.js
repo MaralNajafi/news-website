@@ -6,7 +6,7 @@ function UpdateDOMwithBookmarkedNews() {
     .map((bookmarked) => {
       isBookmarked = bookmarkedNews.includes(bookmarked.id);
       return `
-        <li class="news d-flex flex-col">
+        <li class="news d-flex flex-col" data-id="${bookmarked.id}">
           <a href="${bookmarked.url}" target="_blank">
             <div class="news-img">
               <img
@@ -57,21 +57,33 @@ function UpdateDOMwithBookmarkedNews() {
 
 function addEventListenerToBookmarkBtns() {
   const bookmarkBtns = document.querySelectorAll(".add-bookmark-btn");
+  const DOMbookmarkedNewsLists = document.querySelectorAll(".news");
 
   bookmarkBtns.forEach((bookmarkBtn) => {
     bookmarkBtn.addEventListener("click", (event) => {
       const bookmarkedNewsID = +event.target.closest("button").dataset.id;
-      isBookmarked = bookmarkedNews.includes(bookmarkedNewsID);
-      if (isBookmarked) {
-        bookmarkBtn.firstElementChild.style.fill = "#ddd";
-        const delIndex = bookmarkedNews.findIndex(
-          (item) => item === bookmarkedNewsID
-        );
-        removeBookmark(delIndex);
-        updateBookmarkedNewsListArray();
-        UpdateDOMwithBookmarkedNews();
-        return;
+      const toBeRemoved = Array.from(DOMbookmarkedNewsLists).find(
+        (item) => +item.dataset.id === bookmarkedNewsID
+      );
+      console.log(toBeRemoved);
+      toBeRemoved.classList.add("deleted-news");
+
+      function unBookmark() {
+        isBookmarked = bookmarkedNews.includes(bookmarkedNewsID);
+        if (isBookmarked) {
+          bookmarkBtn.firstElementChild.style.fill = "#ddd";
+          const delIndex = bookmarkedNews.findIndex(
+            (item) => item === bookmarkedNewsID
+          );
+          removeBookmark(delIndex);
+          updateBookmarkedNewsListArray();
+          UpdateDOMwithBookmarkedNews();
+          return;
+        }
       }
+
+      //waiting for the opacity transition to end
+      setTimeout(unBookmark, 510); //How can I use "transitioned eventListener" instead???
     });
   });
 }
