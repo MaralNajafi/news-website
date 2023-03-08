@@ -25,7 +25,6 @@ function UpdateDOMwithBookmarkedNews() {
             <button 
             class="add-bookmark-btn d-block" 
             data-id="${bookmarked.id}"
-            ${isBookmarked ? "disabled" : ""}
             >
             <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -45,6 +44,7 @@ function UpdateDOMwithBookmarkedNews() {
 
   if (bookmarkedNewsListArray.length > 0) {
     DOMbookmarkedNewsList.innerHTML = bookmarked;
+    addEventListenerToBookmarkBtns();
   } else {
     DOMbookmarkedNewsList.classList.add("empty-news-list");
     DOMbookmarkedNewsList.innerHTML = `
@@ -55,13 +55,43 @@ function UpdateDOMwithBookmarkedNews() {
   }
 }
 
+function addEventListenerToBookmarkBtns() {
+  const bookmarkBtns = document.querySelectorAll(".add-bookmark-btn");
+
+  bookmarkBtns.forEach((bookmarkBtn) => {
+    bookmarkBtn.addEventListener("click", (event) => {
+      const bookmarkedNewsID = +event.target.closest("button").dataset.id;
+      isBookmarked = bookmarkedNews.includes(bookmarkedNewsID);
+      if (isBookmarked) {
+        bookmarkBtn.firstElementChild.style.fill = "#ddd";
+        const delIndex = bookmarkedNews.findIndex(
+          (item) => item === bookmarkedNewsID
+        );
+        removeBookmark(delIndex);
+        updateBookmarkedNewsListArray();
+        UpdateDOMwithBookmarkedNews();
+        return;
+      }
+    });
+  });
+}
+
+function updateBookmarkedNewsListArray() {
+  bookmarkedNewsListArray = newsListArray.filter((news) => {
+    return bookmarkedNews.includes(news.id);
+  });
+}
+
+function removeBookmark(delIndex) {
+  bookmarkedNews.splice(delIndex, 1);
+  localStorage.setItem("bookmarkedNewsIDList", bookmarkedNews);
+  updateBookmark();
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   updateBookmarksCountFromLocalStorage();
   newsListArray = await fetchNewsAPI();
   setIDtoNews();
-  bookmarkedNewsListArray = newsListArray.filter((news) => {
-    return bookmarkedNews.includes(news.id);
-  });
-
+  updateBookmarkedNewsListArray();
   UpdateDOMwithBookmarkedNews();
 });
